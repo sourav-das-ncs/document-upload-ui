@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="generalService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="DOCUMENT_TABLE" EntityType="generalService.DOCUMENT_TABLE"/>
+                <ActionImport Name="createDocument" Action="generalService.createDocument"/>
+                <ActionImport Name="updateDocument" Action="generalService.updateDocument"/>
+                <FunctionImport Name="readDocument" Function="generalService.readDocument"/>
+            </EntityContainer>
+            <EntityType Name="DOCUMENT_TABLE">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="DOC_TYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="DOC_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="MIME_TYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CREATED_BY" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CREATED_AT" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <Action Name="createDocument" IsBound="false">
+                <Parameter Name="filename" Type="Edm.String"/>
+                <Parameter Name="content" Type="Edm.String"/>
+                <Parameter Name="mimeType" Type="Edm.String"/>
+            </Action>
+            <Action Name="updateDocument" IsBound="false">
+                <Parameter Name="filename" Type="Edm.String"/>
+                <Parameter Name="content" Type="Edm.String"/>
+                <Parameter Name="mimeType" Type="Edm.String"/>
+            </Action>
+            <Function Name="readDocument" IsBound="false" IsComposable="false">
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Annotations Target="generalService.DOCUMENT_TABLE/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="generalService.DOCUMENT_TABLE/CREATED_AT">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

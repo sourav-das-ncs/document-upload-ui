@@ -1,0 +1,41 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+>
+    <Dialog
+        title="Upload Document"
+        contentWidth="400px"
+        class="sapUiContentPadding"
+    >
+        <content>
+            <l:VerticalLayout>
+                <u:FileUploader
+                    id="fileUploader"
+                    name="myFileUpload"
+                    uploadUrl="upload/"
+                    tooltip="Upload your file to the local server"
+                    uploadComplete="handleUploadComplete"
+                />
+            </l:VerticalLayout>
+        </content>
+        <beginButton>
+            <Button
+                text="Upload File"
+                app:dialogType="Std"
+                press="handleUploadPress"
+            />
+        </beginButton>
+        <endButton>
+			<Button text="Cancel"
+            app:dialogType="Std" 
+            press="onDialogCloseButton" />
+		</endButton>
+
+        <!-- Add your custom value help content here -->
+        <!-- This is just a placeholder, replace it with your custom controls and logic -->
+    </Dialog>
+</core:FragmentDefinition>
