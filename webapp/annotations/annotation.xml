@@ -79,6 +79,10 @@
                                     <PropertyValue Property="Label" String="L1APPR_COMMENTS"/>
                                     <PropertyValue Property="Value" Path="L1APPR_COMMENTS"/>
                                 </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="WF_INSTANCE_ID"/>
+                                    <PropertyValue Property="Value" Path="WF_INSTANCE_ID"/>
+                                </Record>
                             </Collection>
                         </PropertyValue>
                     </Record>
