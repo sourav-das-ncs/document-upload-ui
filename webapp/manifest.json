@@ -160,7 +160,18 @@
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "contextPath": "/DOCUMENT_TABLE"
+                            "contextPath": "/DOCUMENT_TABLE",
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "updateDocument": {
+                                            "press": "ncsdemo.ext.controller.UpdateDocumentExt.updateDocument",
+                                            "enabled": true,
+                                            "text": "Update"
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

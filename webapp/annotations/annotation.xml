@@ -90,6 +90,17 @@
                         <PropertyPath>DOC_TYPE</PropertyPath>
                     </Collection>
                 </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="NAME"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String=""/>
+                        <PropertyValue Property="TypeNamePlural" String=""/>
+                    </Record>
+                </Annotation>
             </Annotations>
             <Annotations Target="generalService.DOCUMENT_TABLE/NAME">
                 <Annotation Term="Common.Label" String="NAME"/>
