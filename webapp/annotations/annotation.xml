@@ -22,13 +22,14 @@
                             <PropertyValue Property="Value" Path="DOC_ID"/>
                         </Record> -->
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="NAME"/>
-                            <PropertyValue Property="Value" Path="NAME"/>
-                        </Record>
-                        <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="STATUS"/>
                             <PropertyValue Property="Value" Path="STATUS"/>
                         </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="NAME"/>
+                            <PropertyValue Property="Value" Path="NAME"/>
+                        </Record>
+                        
                         
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="MIME_TYPE"/>
@@ -46,8 +47,12 @@
                                     <PropertyValue Property="Value" Path="DOC_TYPE"/>
                                 </Record>
                                 <Record Type="UI.DataField">
-                                    <PropertyValue Property="Label" String="DOC_ID"/>
-                                    <PropertyValue Property="Value" Path="DOC_ID"/>
+                                    <PropertyValue Property="Label" String="DOC_NO"/>
+                                    <PropertyValue Property="Value" Path="DOC_NO"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="CREATED_AT"/>
+                                    <PropertyValue Property="Value" Path="CREATED_AT"/>
                                 </Record>
                                 <Record Type="UI.DataField">
                                     <PropertyValue Property="Label" String="STATUS"/>
@@ -69,6 +74,10 @@
                                 <Record Type="UI.DataField">
                                     <PropertyValue Property="Label" String="CREATED_AT"/>
                                     <PropertyValue Property="Value" Path="CREATED_AT"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="L1APPR_COMMENTS"/>
+                                    <PropertyValue Property="Value" Path="L1APPR_COMMENTS"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>

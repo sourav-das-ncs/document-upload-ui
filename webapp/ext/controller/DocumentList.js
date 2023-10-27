@@ -36,14 +36,14 @@ sap.ui.define([
                 }
             }
 
-            this.callAPI = async function (payload) {
+            this.callAPI = function (payload) {
 
                 var appId = 'ncsdemo';
                 var appPath = appId.replaceAll(".", "/");
                 var appModulePath = jQuery.sap.getModulePath(appPath);
 
                 var settings = {
-                    "url": `${appModulePath}/service/general/createDocument`,
+                    "url": `${appModulePath}/docapprsrv/service/general/createDocument`,
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -51,9 +51,12 @@ sap.ui.define([
                     "data": JSON.stringify(payload),
                 };
 
-                $.ajax(settings).done(function (response) {
-                    console.log(response);
-                    MessageToast.show("Document Uploaded.");
+                return new Promise((resolve, reject) => {
+                    $.ajax(settings).done(function (response) {
+                        console.log(response);
+                        MessageToast.show("Document Uploaded.");
+                        resolve(response);
+                    });
                 });
             }
 
@@ -70,8 +73,11 @@ sap.ui.define([
                     }),
                     beginButton: new sap.m.Button({
                         text: "Upload",
-                        press: function () {
-                            this.uploadFile("ew");
+                        press: async function () {
+                            let orderBusyDialog = new sap.m.BusyDialog();
+                            orderBusyDialog.open();
+                            await this.uploadFile("ew");
+                            orderBusyDialog.close();
                         }.bind(this)
                     }),
                     endButton: new sap.m.Button({
