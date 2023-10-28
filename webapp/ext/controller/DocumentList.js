@@ -19,9 +19,9 @@ sap.ui.define([
 
                 const fileReader = new FileReader();
                 fileReader.onload = function (event) {
-                    const content = event.target.result;
+                    let content = event.target.result;
                     console.log(content);
-                    const base64Encoded = btoa(content);
+                    const base64Encoded = btoa(unescape(encodeURIComponent(content)));
                     this.file.content = base64Encoded;
                 }.bind(this);
 
