@@ -16,7 +16,7 @@ server:
             - /test-resources
           url: https://ui5.sap.com
         backend:
-          - path: /service
+          - path: /docapprsrv
             url: https://ncs-pte-ltd-demo-nrdspy5x-dev-nodejs-general-srv.cfapps.us10-001.hana.ondemand.com
     - name: fiori-tools-appreload
       afterMiddleware: compression

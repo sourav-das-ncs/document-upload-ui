@@ -111,6 +111,11 @@
             "routes": [
                 {
                     "pattern": ":?query:",
+                    "name": "podoc",
+                    "target": "podoc"
+                },
+                {
+                    "pattern": "dt:?query:",
                     "name": "DOCUMENT_TABLEList",
                     "target": "DOCUMENT_TABLEList"
                 },
@@ -121,6 +126,13 @@
                 }
             ],
             "targets": {
+                "podoc": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "ncsdemo.view.podoc",
+                    "viewName": "ncsdemo.view.podoc"
+                },
                 "DOCUMENT_TABLEList": {
                     "type": "Component",
                     "id": "DOCUMENT_TABLEList",
@@ -175,6 +187,12 @@
                         }
                     }
                 }
+            },
+            "rootView": {
+                "viewName": "ncsdemo.view.podoc",
+                "type": "XML",
+                "async": true,
+                "id": "podoc"
             }
         },
         "extends": {
