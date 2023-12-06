@@ -27,6 +27,10 @@
                     "odataVersion": "4.0"
                 }
             },
+            "workflowService": {
+                "uri": "/bpmworkflowruntime/public/workflow/odata/v1/tcm",
+                "type": "OData"
+            },
             "annotation": {
                 "type": "ODataAnnotation",
                 "uri": "annotations/annotation.xml",
@@ -98,6 +102,11 @@
                     "autoExpandSelect": true,
                     "earlyRequests": true
                 }
+            },
+            "workflowService": {
+                "dataSource": "workflowService",
+                "preload": true,
+                "settings": {}
             },
             "@i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",

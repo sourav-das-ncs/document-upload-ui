@@ -19,32 +19,6 @@ sap.ui.define([
 
 
                 var oProducts = [
-                    {
-                        "ID": "6aaecb21-571c-427e-b446-3ce09db9eff1",
-                        "DOC_TYPE": "PURDOC",
-                        "DOC_ID": "LeWBw1kyahONwG7DJZbwM-LJEM4C2z07AHxOt11uVAY",
-                        "DOC_NO": "6AAECB21",
-                        "NAME": "Purchase Agreement.pdf",
-                        "MIME_TYPE": "application/pdf",
-                        "STATUS": "PENDING",
-                        "WF_INSTANCE_ID": "249420d2-7543-11ee-9266-eeee0a87eb5a",
-                        "L1APPR_COMMENTS": null,
-                        "CREATED_BY": "",
-                        "CREATED_AT": "2023-10-28T03:36:12Z"
-                    },
-                    // {
-                    //     "ID": "6aaecb21-571c-427e-b446-3ce09db9eff1",
-                    //     "DOC_TYPE": "PURDOC",
-                    //     "DOC_ID": "LeWBw1kyahONwG7DJZbwM-LJEM4C2z07AHxOt11uVAY",
-                    //     "DOC_NO": "6AAECB21",
-                    //     "NAME": "Purchase Agreement.pdf",
-                    //     "MIME_TYPE": "application/pdf",
-                    //     "STATUS": "PENDING",
-                    //     "WF_INSTANCE_ID": "249420d2-7543-11ee-9266-eeee0a87eb5a",
-                    //     "L1APPR_COMMENTS": null,
-                    //     "CREATED_BY": "",
-                    //     "CREATED_AT": "2023-10-28T03:36:12Z"
-                    // }
                 ];
 
                 // this.getView().setModel(new sap.ui.model.json.JSONModel(oProducts), "products");
@@ -119,12 +93,12 @@ sap.ui.define([
                     }
                 });
             },
-            fetchCSRFToken: function () {
+            fetchCSRFToken: async function () {
                 var appModulePath = this.getModulePath();
                 var that = this;
-                $.ajax({
+                await $.ajax({
                     url: appModulePath + "/bpmworkflowruntime/public/workflow/rest/v1/xsrf-token",
-                    async: false,
+                    async: true,
                     method: "GET",
                     headers: {
                         "X-CSRF-Token": "Fetch"
@@ -178,7 +152,8 @@ sap.ui.define([
             onReset: function () {
 
             },
-            onStartPress: function (sPONumber) {
+
+            triggerWorkflow: function () {
                 // create busy dialog
 
                 // var orderBusyDialog = new sap.m.BusyDialog();
@@ -187,22 +162,33 @@ sap.ui.define([
                 // sap.m.MessageBox.information("Workflow started with PO Number: "+sPONumber);
 
                 var startContext = this.getView().getModel("PO").getData();
-                startContext.RequestId = sPONumber;
-                startContext.BasicData.ponumber = sPONumber;
+                let attachment = startContext.attachments[0];
+
 
                 var workflowStartPayload = {
-                    definitionId: "us10.demo-nrdspy5x.purchaseorderprocess.purchaseOrderFlow",
-                    context: {input: startContext}
+                    definitionId: "us10.demo-nrdspy5x.documentapproval.documentApprovalVerification",
+                    context: {
+                        docid: "#PO_DOC_0001",
+                        docname: attachment.NAME,
+                        doctype: "PURDOC",
+                        docmime: attachment.MIME_TYPE,
+                        docsize: attachment.SIZE
+                    }
                 }
 
                 var sPath = this.getModulePath() + "/bpmworkflowruntime/public/workflow/rest/v1/workflow-instances";
 
 
                 this.callRESTService(sPath, workflowStartPayload, "POST", this.TOKEN, function () {
-                    MessageBox.information("Workflow started with PO Number: " + sPONumber);
+                    MessageBox.information("Document Workflow started for PO Doc No: #PO_DOC_0001 ");
                 });
 
 
+            },
+
+            onSubmit: async function () {
+                await this.fetchCSRFToken();
+                this.triggerWorkflow();
             },
 
             createDocument: async function (oEvent) {
@@ -230,8 +216,18 @@ sap.ui.define([
                 this.uploadFile = async function (oEvent) {
                     if (this.file.content) {
                         console.log(this.file);
-                        await this.callAPI(this.file);
+                        // await this.callAPI(this.file);
                         this.dialog.close();
+                        const oRequestDetails = this.getView().getModel("PO").getData();
+
+                        oRequestDetails.attachments.push({
+                            "DOC_NO": "#PO_DOC_0001",
+                            "NAME": this.file.filename,
+                            "MIME_TYPE": this.file.mimeType,
+                            "STATUS": "PENDING",
+                            "SIZE": "5 Kb"
+                        });
+                        this.getView().getModel("PO").setData(oRequestDetails);
                     }
                 }
 

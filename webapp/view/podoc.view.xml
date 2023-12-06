@@ -88,7 +88,7 @@
                                         <Text text="Document Type"/>
                                     </Column>
                                     <Column hAlign="End">
-                                        <Text text="Created At"/>
+                                        <Text text="Size"/>
                                     </Column>
 <!--                                    <Column hAlign="End" minScreenWidth="Tablet" demandPopin="true"-->
 <!--                                            popinDisplay="Inline">-->
@@ -114,7 +114,7 @@
 <!--                                            </Select>-->
                                             <Text text="{PO>STATUS}"/>
                                             <Text text="{PO>MIME_TYPE}"/>
-                                            <Text text="{PO>CREATED_AT}"/>
+                                            <Text text="{PO>SIZE}"/>
 
                                         </cells>
                                     </ColumnListItem>
@@ -126,8 +126,9 @@
                     <footer>
                         <OverflowToolbar>
                             <ToolbarSpacer/>
-                            <Button type="Emphasized" text="Attach Document" press="onCreate"/>
+                            <Button type="Default" text="Attach Document" press="onCreate"/>
 <!--                            <Button text="Reset" press="onReset"/>-->
+                            <Button type="Emphasized" text="Submit" press="onSubmit"/>
                         </OverflowToolbar>
                     </footer>
                 </Page>
